@@ -4,11 +4,16 @@ import '../models/announcement.dart';
 import '../providers/announcement_provider.dart';
 import 'announcement_detail_screen.dart';
 
-class AnnouncementListScreen extends ConsumerWidget {
+class AnnouncementListScreen extends ConsumerStatefulWidget {
   const AnnouncementListScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<AnnouncementListScreen> createState() => _AnnouncementListScreenState();
+}
+  class _AnnouncementListScreenState extends ConsumerState<AnnouncementListScreen> {
+
+  @override
+  Widget build(BuildContext context) {
     final asyncAnnouncements = ref.watch(announcementsProvider);
     final selectedCategory = ref.watch(selectedCategoryProvider);
     final categories = ['Semua', 'Akademik', 'Beasiswa', 'Kegiatan', 'Prestasi'];
