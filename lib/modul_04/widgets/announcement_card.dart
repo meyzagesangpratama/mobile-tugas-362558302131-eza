@@ -50,7 +50,7 @@ class AnnouncementCard extends StatelessWidget {
                     ),
                   ),
                   const Spacer(),
-                  Text('${announcement.date}', style: teks.bodySmall),
+                  Text(announcement.date, style: teks.bodySmall),
                 ],
               ),
               const SizedBox(height: 10),

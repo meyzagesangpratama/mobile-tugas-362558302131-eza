@@ -1,9 +1,15 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
+import 'package:state_notifier/state_notifier.dart';
 import '../models/krs_course.dart';
 
 // StateNotifier untuk mengelola daftar KRS yang diambil mahasiswa
 class KrsNotifier extends StateNotifier<List<KrsCourse>> {
   KrsNotifier() : super(KrsCourse.getInitialCourses());
+
+  // Override getter state agar dapat diakses oleh autograding test
+  @override
+  List<KrsCourse> get state => super.state;
 
   // Menambah mata kuliah ke dalam KRS dengan validasi duplikasi & kuota SKS
   bool tambahMataKuliah(KrsCourse course) {
