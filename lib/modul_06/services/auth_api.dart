@@ -1,6 +1,5 @@
 import '../models/sesi_pengguna.dart';
 
-/// Kegagalan autentikasi yang aman ditampilkan ke pengguna.
 class AuthException implements Exception {
   final String pesan;
   final int kode;
@@ -9,23 +8,30 @@ class AuthException implements Exception {
   String toString() => 'AuthException($kode): $pesan';
 }
 
-/// API login tiruan: tidak menyentuh jaringan, hasilnya deterministik.
 class AuthApi {
-  // Kredensial demo ditulis terbuka karena memang dummy.
   static const String emailDemo = 'student@trpl.test';
   static const String sandiDemo = 'belajar123';
   static const String emailTerkunci = 'terkunci@trpl.test';
   static const String emailServerGangguan = 'gangguan@trpl.test';
 
-  /// Jeda buatan supaya keadaan "memproses" benar-benar terlihat.
   final Duration tunda;
   const AuthApi({this.tunda = const Duration(milliseconds: 700)});
+
+  static int _callCount = 0;
+
+  int get callCount => _callCount;
+
+  static void resetCallCount() {
+    _callCount = 0;
+  }
 
   Future<SesiPengguna> masuk({
     required String email,
     required String sandi,
     Duration masaBerlaku = const Duration(hours: 2),
   }) async {
+    _callCount++;
+
     await Future<void>.delayed(tunda);
 
     final String emailBersih = email.trim().toLowerCase();
@@ -53,15 +59,11 @@ class AuthApi {
     }
 
     if (emailBersih != emailDemo || sandi != sandiDemo) {
-      // Pesan ini SENGAJA tidak menyebut mana yang salah — menyebut
-      // "email tidak terdaftar" akan membocorkan daftar pengguna.
       throw const AuthException('Email atau kata sandi salah.');
     }
 
     final DateTime mulai = DateTime.now();
     return SesiPengguna(
-      // Token tiruan: bentuknya menyerupai token sungguhan, tetapi tidak
-      // dapat dipakai ke sistem mana pun.
       token: 'dummy.${mulai.millisecondsSinceEpoch}.trpl',
       email: emailBersih,
       nama: _namaUntuk(emailBersih),
@@ -71,8 +73,6 @@ class AuthApi {
     );
   }
 
-  /// Memperbarui masa berlaku sesi — meniru "refresh token".
-  /// Dipakai Fase B; token tetap sama karena tidak ada server sungguhan.
   Future<SesiPengguna> perbaruiSesi(
     SesiPengguna sesi, {
     Duration masaBerlaku = const Duration(hours: 2),

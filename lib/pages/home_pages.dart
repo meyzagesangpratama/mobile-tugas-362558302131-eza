@@ -32,7 +32,6 @@ class HomePages extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 24),
-
               const Text(
                 'Nasi Goreng',
                 style: TextStyle(
@@ -42,7 +41,6 @@ class HomePages extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8),
-
               const Text(
                 'Rp15.000',
                 style: TextStyle(
@@ -52,7 +50,6 @@ class HomePages extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
-
               const Text(
                 'Nasi goreng dengan telur, ayam, dan sayuran. Menu favorit di kantin kampus!',
                 textAlign: TextAlign.center,
@@ -63,7 +60,6 @@ class HomePages extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 32),
-
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(

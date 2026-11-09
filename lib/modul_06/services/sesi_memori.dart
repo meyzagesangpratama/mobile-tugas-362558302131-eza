@@ -1,7 +1,8 @@
 import '../models/sesi_pengguna.dart';
+
 class SesiMemori {
   SesiPengguna? _sesi;
-  int jumlahPenulisan = 0; // Dipakai pengujian.
+  int jumlahPenulisan = 0;
 
   SesiPengguna? baca() => _sesi;
   bool get adaSesi => _sesi != null;
@@ -11,5 +12,7 @@ class SesiMemori {
     jumlahPenulisan++;
   }
 
-  Future<void> hapus() async { _sesi = null; }
+  Future<void> hapus() async {
+    _sesi = null;
+  }
 }

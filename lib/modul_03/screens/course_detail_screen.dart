@@ -73,7 +73,8 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
           children: [
             CircularProgressIndicator(),
             SizedBox(height: 16),
-            Text('Memuat rincian silabus mata kuliah...', style: TextStyle(color: Color(0xFF64748B))),
+            Text('Memuat rincian silabus mata kuliah...',
+                style: TextStyle(color: Color(0xFF64748B))),
           ],
         ),
       );
@@ -87,11 +88,15 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(Icons.error_outline_rounded, size: 64, color: Colors.redAccent),
+              const Icon(Icons.error_outline_rounded,
+                  size: 64, color: Colors.redAccent),
               const SizedBox(height: 16),
               const Text(
                 'Gagal Mengambil Data Silabus',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF0F172A)),
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF0F172A)),
               ),
               const SizedBox(height: 8),
               const Text(
@@ -102,7 +107,8 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
               const SizedBox(height: 20),
               FilledButton.icon(
                 onPressed: _simulasiMuatUlang,
-                style: FilledButton.styleFrom(backgroundColor: const Color(0xFF0284C7)),
+                style: FilledButton.styleFrom(
+                    backgroundColor: const Color(0xFF0284C7)),
                 icon: const Icon(Icons.refresh),
                 label: const Text('Coba Lagi (Retry)'),
               ),
@@ -120,11 +126,13 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(Icons.search_off_rounded, size: 64, color: Color(0xFF94A3B8)),
+              const Icon(Icons.search_off_rounded,
+                  size: 64, color: Color(0xFF94A3B8)),
               const SizedBox(height: 16),
               Text(
                 'Mata Kuliah "${widget.courseCode}" Tidak Ditemukan',
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 12),
               OutlinedButton(
@@ -145,7 +153,8 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Card(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             elevation: 2,
             child: Padding(
               padding: const EdgeInsets.all(20.0),
@@ -156,7 +165,8 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 4),
                         decoration: BoxDecoration(
                           color: const Color(0xFFE0F2FE),
                           borderRadius: BorderRadius.circular(8),
@@ -172,23 +182,28 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
                       ),
                       Text(
                         '${course.sks} SKS',
-                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 14),
                       ),
                     ],
                   ),
                   const SizedBox(height: 12),
                   Text(
                     course.name,
-                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 8),
                   Row(
                     children: [
-                      const Icon(Icons.person, size: 18, color: Color(0xFF64748B)),
+                      const Icon(Icons.person,
+                          size: 18, color: Color(0xFF64748B)),
                       const SizedBox(width: 8),
                       Text(
                         course.lecturer,
-                        style: const TextStyle(color: Color(0xFF475569), fontWeight: FontWeight.w500),
+                        style: const TextStyle(
+                            color: Color(0xFF475569),
+                            fontWeight: FontWeight.w500),
                       ),
                     ],
                   ),
@@ -199,14 +214,18 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
           const SizedBox(height: 20),
           const Text(
             'Deskripsi & Capaian Pembelajaran',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF0F172A)),
+            style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF0F172A)),
           ),
           const SizedBox(height: 8),
           Text(
             course.description.isNotEmpty
                 ? course.description
                 : 'Belum ada deskripsi silabus untuk mata kuliah ini.',
-            style: const TextStyle(fontSize: 14, color: Color(0xFF475569), height: 1.5),
+            style: const TextStyle(
+                fontSize: 14, color: Color(0xFF475569), height: 1.5),
           ),
         ],
       ),

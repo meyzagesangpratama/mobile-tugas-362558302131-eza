@@ -1,36 +1,36 @@
 import 'package:flutter/material.dart';
- 
+
 import '../models/sesi_pengguna.dart';
 import '../services/auth_api.dart';
 import '../services/sesi_memori.dart';
 import '../widgets/field_kata_sandi.dart';
 import '../widgets/kartu_sesi.dart';
- 
+
 enum StatusMasuk { diam, memproses, gagal }
- 
+
 class LoginScreen extends StatefulWidget {
   final AuthApi api;
   final SesiMemori sesiMemori;
- 
+
   const LoginScreen({
     super.key,
     required this.api,
     required this.sesiMemori,
   });
- 
+
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
- 
+
 class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailCtrl = TextEditingController();
   final TextEditingController _sandiCtrl = TextEditingController();
- 
+
   StatusMasuk _status = StatusMasuk.diam;
   String? _pesan;
   SesiPengguna? _sesi;
- 
+
   @override
   void initState() {
     super.initState();
@@ -44,14 +44,14 @@ class _LoginScreenState extends State<LoginScreen> {
       }
     }
   }
- 
+
   @override
   void dispose() {
     _emailCtrl.dispose();
     _sandiCtrl.dispose();
     super.dispose();
   }
- 
+
   String? _validasiEmail(String? nilai) {
     final String teks = (nilai ?? '').trim();
     if (teks.isEmpty) return 'Email wajib diisi.';
@@ -60,22 +60,22 @@ class _LoginScreenState extends State<LoginScreen> {
     }
     return null;
   }
- 
+
   String? _validasiSandi(String? nilai) {
     if (nilai == null || nilai.isEmpty) return 'Kata sandi wajib diisi.';
     return null;
   }
- 
+
   Future<void> _masuk() async {
     if (_status == StatusMasuk.memproses) return; // Cegah tekan ganda.
     if (!(_formKey.currentState?.validate() ?? false)) return;
- 
+
     FocusScope.of(context).unfocus();
     setState(() {
       _status = StatusMasuk.memproses;
       _pesan = null;
     });
- 
+
     try {
       final SesiPengguna sesi = await widget.api.masuk(
         email: _emailCtrl.text,
@@ -83,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
       );
       await widget.sesiMemori.simpan(sesi);
       if (!mounted) return;
-      _sandiCtrl.clear(); 
+      _sandiCtrl.clear();
       setState(() {
         _sesi = sesi;
         _status = StatusMasuk.diam;
@@ -102,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
       });
     }
   }
- 
+
   Future<void> _keluar() async {
     await widget.sesiMemori.hapus();
     if (!mounted) return;
@@ -115,11 +115,11 @@ class _LoginScreenState extends State<LoginScreen> {
       const SnackBar(content: Text('Anda telah keluar.')),
     );
   }
- 
+
   @override
   Widget build(BuildContext context) {
     final SesiPengguna? sesi = _sesi;
- 
+
     return Scaffold(
       appBar: AppBar(
         title: Text(sesi == null ? 'Masuk' : 'Beranda'),
@@ -144,11 +144,11 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
- 
+
   Widget _bangunFormulir(BuildContext context) {
     final bool sibuk = _status == StatusMasuk.memproses;
     final ColorScheme warna = Theme.of(context).colorScheme;
- 
+
     return Form(
       key: _formKey,
       child: Column(
@@ -198,6 +198,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   )
                 : const Text('Masuk'),
           ),
+          const SizedBox(height: 16),
+          Center(
+            child: Text(
+              'Jumlah Pemanggilan masuk : ${widget.api.callCount}',
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold, color: Colors.blueGrey),
+            ),
+          ),
           const SizedBox(height: 24),
           const _PetunjukAkunDemo(),
         ],
@@ -205,12 +213,12 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
- 
+
 class _KotakPesan extends StatelessWidget {
   final String pesan;
- 
+
   const _KotakPesan({required this.pesan});
- 
+
   @override
   Widget build(BuildContext context) {
     final ColorScheme warna = Theme.of(context).colorScheme;
@@ -236,10 +244,10 @@ class _KotakPesan extends StatelessWidget {
     );
   }
 }
- 
+
 class _PetunjukAkunDemo extends StatelessWidget {
   const _PetunjukAkunDemo();
- 
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -267,4 +275,3 @@ class _PetunjukAkunDemo extends StatelessWidget {
     );
   }
 }
- 

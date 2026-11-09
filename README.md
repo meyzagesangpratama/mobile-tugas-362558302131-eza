@@ -86,10 +86,7 @@ Mahasiswa **wajib** menggunakan format pesan commit terstruktur:
 Sesuai prinsip **Responsible AI** di lingkungan akademik Politeknik Negeri Banyuwangi, mahasiswa diperbolehkan menggunakan AI coding assistant (GitHub Copilot, Gemini Code Assist, ChatGPT) sebagai akselerator belajar, dengan kewajiban mencatat penggunaannya secara transparan pada tabel berikut:
 
 | Modul / File Kode | Alat AI yang Digunakan | Tujuan Penggunaan | Validasi Teknis yang Dilakukan Mahasiswa |
-|---|---|---|---|
-| *Contoh: lib/modul_02/widgets/course_card.dart* | *GitHub Copilot* | *Saran styling Elevation & BoxDecoration* | *Memeriksa contrast ratio WCAG AA dan padding antarmuka* |
-| *Contoh: lib/modul_04/models/announcement.dart* | *Gemini Code Assist* | *Pengecekan null-safety pada fromJson* | *Menambahkan fallback default string kosong untuk mencegah error runtime* |
-
+| lib/praktikum B/modul_06/repositories/aman_sesi_repository.dart | Gemini | Perbandingan shared_preferences dan flutter_secure_storage untuk menyimpan token | Menutup lalu membuka ulang aplikasi untuk memastikan sesi bertahan, dan menguji data korup agar otomatis terhapus |
+| lib/modul_03/providers/krs_provider.dart | Gemini | Penjelasan konsep Riverpod Notifier dan cara memperbarui state secara immutable | Menjalankan flutter test test/modul_03_test.dart dan menguji tambah/hapus mata kuliah KRS secara manual |
 ---
-
 *Hak Cipta © 2026 Jurusan Bisnis dan Informatika (JBI), Politeknik Negeri Banyuwangi.*

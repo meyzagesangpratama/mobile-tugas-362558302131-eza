@@ -99,7 +99,6 @@ class KartuSesi extends StatelessWidget {
     return bersih.isEmpty ? '?' : bersih[0].toUpperCase();
   }
 
-
   static String _samarkanToken(String token) {
     if (token.length <= 8) return '••••';
     return '${token.substring(0, 8)}••••';

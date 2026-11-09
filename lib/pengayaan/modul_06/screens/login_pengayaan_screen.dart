@@ -115,8 +115,7 @@ class _LoginPengayaanScreenState extends State<LoginPengayaanScreen> {
                           ? const SizedBox(
                               height: 20,
                               width: 20,
-                              child:
-                                  CircularProgressIndicator(strokeWidth: 2),
+                              child: CircularProgressIndicator(strokeWidth: 2),
                             )
                           : const Text('Masuk'),
                     ),
@@ -137,8 +136,8 @@ class _LoginPengayaanScreenState extends State<LoginPengayaanScreen> {
   }
 
   Widget _bangunPilihanPenyimpanan(SesiController c, bool sibuk) {
-    final int terpilih =
-        widget.pilihan.indexWhere((SesiRepository r) => identical(r, c.repository));
+    final int terpilih = widget.pilihan
+        .indexWhere((SesiRepository r) => identical(r, c.repository));
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
